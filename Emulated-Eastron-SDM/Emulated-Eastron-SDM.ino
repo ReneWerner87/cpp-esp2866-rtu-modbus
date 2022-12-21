@@ -4,17 +4,15 @@
 #include <ModbusRTU.h>
 // #include "private.h"
 
-SoftwareSerial S(D3, D2);  // we need one serial port for communicating with RS 485 to TTL adapter
+SoftwareSerial S(RX, TX);  // we need one serial port for communicating with RS 485 to TTL adapter
 
-#define SLAVE_ID 1
+#define SLAVE_ID 2
 
 ModbusRTU mb;
 
 //WiFiClient espClient;
 //PubSubClient client(espClient);
-long lastMsg = 0;
-char msg[50];
-int value = 0;
+//long lastMsg = 0;
 
 // **************************************************
 void setup() {
@@ -29,39 +27,6 @@ void setup() {
 
   mb.slave(SLAVE_ID);
 
-  // add a series of Input registers
-  mb.addIreg(0);
-  mb.addIreg(1);
-  mb.addIreg(2);
-  mb.addIreg(3);
-  mb.addIreg(4);
-  mb.addIreg(5);
-  mb.addIreg(6);
-  mb.addIreg(7);
-  mb.addIreg(8);
-  mb.addIreg(9);
-  mb.addIreg(10);
-  mb.addIreg(11);
-  mb.addIreg(12);
-  mb.addIreg(13);
-
-  // set Input register values
-  mb.Ireg(0, 250);   // line to neutral volts (integer-part)
-  mb.Ireg(1, 400);   // line to neutral volts (fractional-part)
-  mb.Ireg(2, 10);    // Current Amps  (integer-part)
-  mb.Ireg(3, 54);    // Current Amps (fractional part)
-  mb.Ireg(4, 2500);  // Active power Watts (integer part)
-  mb.Ireg(5, 76);    // Active power Watts (fractional part)
-  mb.Ireg(6, 2639);  // Apparent power VoltAmps (integer part)
-  mb.Ireg(7, 216);   // Apparent power VoltAmps (float part)
-  mb.Ireg(8, 2375);  // Reactive power VAr (integer part)
-  mb.Ireg(9, 5);     // Reactive power VAr (fractional part)
-  mb.Ireg(10, 0);    // Power factor (none) (integer part)
-  mb.Ireg(11, 90);   // Power factor (none) (fractional part)
-  mb.Ireg(12, 30);   // Phase angle (Degree) (integer-part) - ** this is not a
-                     // calculated value but my device doesnt actially use it
-  mb.Ireg(13, 1);    // Phase angle (Degree) (fractional-part) - ** this is not a
-                     // calculated value but my device doesnt actially use it
 }
 
 // **************************************************
