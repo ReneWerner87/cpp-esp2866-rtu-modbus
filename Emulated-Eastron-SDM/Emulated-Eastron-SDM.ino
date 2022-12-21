@@ -27,6 +27,11 @@ void setup() {
 
   mb.slave(SLAVE_ID);
 
+  mb.addHreg(12);
+  mb.Hreg(12, 1111);
+
+  mb.addHreg(13);
+  mb.Hreg(13, 2222);
 }
 
 // **************************************************
